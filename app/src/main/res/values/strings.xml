@@ -3,4 +3,6 @@
     <string name="login">ZALOGUJ</string>
     <string name="loginHint">Login</string>
     <string name="passwordHint">Hasło</string>
+    <string name="loginEmpty">Login jest pusty</string>
+    <string name="passwordEmpty">Hasło jest puste</string>
 </resources>

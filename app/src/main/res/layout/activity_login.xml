@@ -9,13 +9,13 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/loginLogo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:src="@drawable/logo"
         android:layout_marginBottom="60dp" />
 
     <EditText
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
@@ -25,16 +25,19 @@
         android:hint="@string/loginHint" />
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
         android:textSize="15sp"
         android:padding="10dp"
         android:layout_marginBottom="60dp"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif"
         android:hint="@string/passwordHint" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
