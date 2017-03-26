@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/drawerVisits"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="@string/visits" />
+        <item
+            android:id="@+id/drawerCaseRecord"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="@string/caseRecord" />
+        <item
+            android:id="@+id/drawerUserDetails"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/userDetails" />
+        <item
+            android:id="@+id/drawerLogOut"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="@string/logOut" />
+    </group>
+
+</menu>

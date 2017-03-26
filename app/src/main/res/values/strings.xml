@@ -5,4 +5,8 @@
     <string name="passwordHint">Hasło</string>
     <string name="loginEmpty">Login jest pusty</string>
     <string name="passwordEmpty">Hasło jest puste</string>
+    <string name="visits">Wizyty</string>
+    <string name="caseRecord">Historia chorób</string>
+    <string name="userDetails">Twoje dane</string>
+    <string name="logOut">Wyloguj</string>
 </resources>
