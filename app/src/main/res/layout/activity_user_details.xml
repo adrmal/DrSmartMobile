@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/nameImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_person_black_24dp"
+        android:tint="@color/colorAccent"
+        android:paddingStart="16dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:text="Adrian Małolepszy"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@+id/nameImage"
+        app:layout_constraintBottom_toBottomOf="@id/nameImage"
+        app:layout_constraintStart_toEndOf="@id/nameImage"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingEnd="16dp" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:text="mężczyzna"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toEndOf="@id/nameImage"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingEnd="16dp" />
+
+    <TextView
+        android:id="@+id/dateOfBirth"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:text="07.11.1994 r."
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/gender"
+        app:layout_constraintStart_toEndOf="@id/nameImage"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingEnd="16dp" />
+
+</android.support.constraint.ConstraintLayout>

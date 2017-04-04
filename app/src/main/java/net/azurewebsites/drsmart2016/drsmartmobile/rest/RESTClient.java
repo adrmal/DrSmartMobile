@@ -1,5 +1,6 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.rest;
 
+import net.azurewebsites.drsmart2016.drsmartmobile.model.MedicalHistory;
 import net.azurewebsites.drsmart2016.drsmartmobile.model.User;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class RESTClient {
 
     private RESTClient() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://drsmart2016.azurewebsites.net/api")
+                .baseUrl("http://drsmartmobile.azurewebsites.net")
                 .build();
 
         restInterface = retrofit.create(RESTInterface.class);
@@ -33,6 +34,10 @@ public class RESTClient {
 
     public User getUser(String userId) throws IOException {
         return restInterface.getUser(userId).execute().body();
+    }
+
+    public MedicalHistory getMedicalHistory(String historyId) throws IOException {
+        return restInterface.getMedicalHistory(historyId).execute().body();
     }
 
 }

@@ -1,4 +1,4 @@
-package net.azurewebsites.drsmart2016.drsmartmobile.view;
+package net.azurewebsites.drsmart2016.drsmartmobile.view.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

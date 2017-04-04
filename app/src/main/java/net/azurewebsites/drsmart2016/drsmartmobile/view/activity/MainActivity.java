@@ -1,4 +1,4 @@
-package net.azurewebsites.drsmart2016.drsmartmobile.view;
+package net.azurewebsites.drsmart2016.drsmartmobile.view.activity;
 
 import android.content.Intent;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.NavigationView;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import net.azurewebsites.drsmart2016.drsmartmobile.R;
 
@@ -47,18 +46,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void doNavigationDrawerAction(MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
+        Intent intent;
         switch(item.getItemId()) {
             case R.id.drawerVisits:
-                Toast.makeText(this, R.string.visits, Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, VisitsActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.drawerCaseRecord:
-                Toast.makeText(this, R.string.caseRecord, Toast.LENGTH_SHORT).show();
+            case R.id.drawerMedicalHistory:
+                intent = new Intent(this, MedicalHistoryActivity.class);
+                startActivity(intent);
                 break;
             case R.id.drawerUserDetails:
-                Toast.makeText(this, R.string.userDetails, Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, UserDetailsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.drawerLogOut:
-                Intent intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
         }
     }

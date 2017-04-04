@@ -8,9 +8,9 @@
             android:icon="@drawable/ic_event_black_24dp"
             android:title="@string/visits" />
         <item
-            android:id="@+id/drawerCaseRecord"
+            android:id="@+id/drawerMedicalHistory"
             android:icon="@drawable/ic_history_black_24dp"
-            android:title="@string/caseRecord" />
+            android:title="@string/medicalHistory" />
         <item
             android:id="@+id/drawerUserDetails"
             android:icon="@drawable/ic_person_black_24dp"

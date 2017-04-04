@@ -1,5 +1,6 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.rest;
 
+import net.azurewebsites.drsmart2016.drsmartmobile.model.MedicalHistory;
 import net.azurewebsites.drsmart2016.drsmartmobile.model.User;
 
 import java.util.List;
@@ -15,5 +16,8 @@ interface RESTInterface {
 
     @GET("users/{userId}")
     Call<User> getUser(@Path("userId") String userId);
+
+    @GET("histories/{historyId}")
+    Call<MedicalHistory> getMedicalHistory(@Path("historyId") String historyId);
 
 }
