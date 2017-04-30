@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class User {
 
+    protected String id;
     protected String firstName;
     protected String secondName;
     protected String lastName;

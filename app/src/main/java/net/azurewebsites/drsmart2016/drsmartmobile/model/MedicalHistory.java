@@ -7,10 +7,11 @@ import lombok.Data;
 @Data
 public class MedicalHistory {
 
-    private List<Disease> diseases;
+    private String patientId;
+    private List<Record> records;
 
-    public void addDisease(Disease disease) {
-        diseases.add(disease);
+    public void addRecord(Record record) {
+        records.add(record);
     }
 
 }

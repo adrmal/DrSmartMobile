@@ -1,24 +1,20 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.rest;
 
-import net.azurewebsites.drsmart2016.drsmartmobile.model.MedicalHistory;
-import net.azurewebsites.drsmart2016.drsmartmobile.model.User;
-
-import java.io.IOException;
-import java.util.List;
-
-import retrofit2.Retrofit;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class RESTClient {
 
     private static RESTClient restClient;
-    private static RESTInterface restInterface;
+    private OkHttpClient okHttpClient;
+    private static final String BASE_URL = "http://drsmartmobile.azurewebsites.net/";
+    private static final MediaType APPLICATION_JSON = MediaType.parse("application/json");
 
     private RESTClient() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://drsmartmobile.azurewebsites.net")
-                .build();
-
-        restInterface = retrofit.create(RESTInterface.class);
+        okHttpClient = new OkHttpClient();
     }
 
     public static RESTClient getClient() {
@@ -28,16 +24,14 @@ public class RESTClient {
         return restClient;
     }
 
-    public List<User> getUsers() throws IOException {
-        return restInterface.getUsers().execute().body();
-    }
+    public void loginUser(String username, String password, Callback callback) {
+        String requestBody = "username=" + username + "&password=" + password + "&grant_type=password";
+        Request request = new Request.Builder()
+                .url(BASE_URL + "token")
+                .post(RequestBody.create(APPLICATION_JSON, requestBody))
+                .build();
 
-    public User getUser(String userId) throws IOException {
-        return restInterface.getUser(userId).execute().body();
-    }
-
-    public MedicalHistory getMedicalHistory(String historyId) throws IOException {
-        return restInterface.getMedicalHistory(historyId).execute().body();
+        okHttpClient.newCall(request).enqueue(callback);
     }
 
 }

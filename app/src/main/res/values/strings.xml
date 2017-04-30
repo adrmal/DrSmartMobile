@@ -5,8 +5,10 @@
     <string name="passwordHint">Hasło</string>
     <string name="loginEmpty">Login jest pusty</string>
     <string name="passwordEmpty">Hasło jest puste</string>
+    <string name="incorrectLoginOrPassword">Błędny login lub hasło</string>
+    <string name="connectionError">Błąd połączenia z Internetem</string>
     <string name="visits">Wizyty</string>
-    <string name="medicalHistory">Historia chorób</string>
+    <string name="medicalHistory">Historia medyczna</string>
     <string name="userDetails">Twoje dane</string>
     <string name="logOut">Wyloguj</string>
     <string name="registerVisit">Zarejestruj się na wizytę</string>
