@@ -35,6 +35,9 @@
         <activity
             android:name=".view.activity.RegisterVisitActivity"
             android:parentActivityName=".view.activity.VisitsActivity" />
+        <activity
+            android:name=".view.activity.RecordDetailsActivity"
+            android:parentActivityName=".view.activity.MedicalHistoryActivity" />
     </application>
 
 </manifest>

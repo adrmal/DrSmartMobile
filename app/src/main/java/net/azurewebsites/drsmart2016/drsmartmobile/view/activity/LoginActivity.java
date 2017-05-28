@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.JsonSyntaxException;
+
 import net.azurewebsites.drsmart2016.drsmartmobile.R;
 import net.azurewebsites.drsmart2016.drsmartmobile.model.Token;
 import net.azurewebsites.drsmart2016.drsmartmobile.rest.RESTClient;
@@ -30,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLogin;
     private EditText editTextPassword;
     private Button button;
-    public static final String TOKEN = "TOKEN";
+    public static final String TOKEN_KEY = "TOKEN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isLoginEmpty() || isPasswordEmpty()) {
+                /*if(isLoginEmpty() || isPasswordEmpty()) {
                     setLoginErrorIfNeeded();
                     setPasswordErrorIfNeeded();
                 }
@@ -63,18 +65,25 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
-                            Token token = parseJsonToToken(response.body().string());
-                            if(token.getAccessToken() == null) {
-                                showToast(R.string.incorrectLoginOrPassword);
+                            try {
+                                Token token = parseJsonToToken(response.body().string());
+                                if(token.getAccessToken() == null) {
+                                    showToast(R.string.incorrectLoginOrPassword);
+                                }
+                                else {
+                                    saveAccessTokenToSharedPreferences(token);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
                             }
-                            else {
-                                saveTokenToSharedPreferences(token);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
+                            catch(JsonSyntaxException e) {
+                                showToast(R.string.webServiceError);
                             }
                         }
                     });
-                }
+                }*/
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -133,9 +142,9 @@ public class LoginActivity extends AppCompatActivity {
         return (Token) JsonTool.fromJson(json, Token.class);
     }
 
-    private void saveTokenToSharedPreferences(Token token) {
+    private void saveAccessTokenToSharedPreferences(Token token) {
         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit();
-        editor.putString(TOKEN, token.getAccessToken());
+        editor.putString(TOKEN_KEY, token.getAccessToken());
         editor.apply();
     }
 

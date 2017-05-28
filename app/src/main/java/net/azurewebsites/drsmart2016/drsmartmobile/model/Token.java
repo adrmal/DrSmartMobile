@@ -20,4 +20,8 @@ public class Token {
     @SerializedName(".expires")
     private String expires;
 
+    public Token(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
 }

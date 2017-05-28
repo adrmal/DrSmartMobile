@@ -1,5 +1,7 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.rest;
 
+import net.azurewebsites.drsmart2016.drsmartmobile.model.Token;
+
 import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -10,7 +12,9 @@ public class RESTClient {
 
     private static RESTClient restClient;
     private OkHttpClient okHttpClient;
-    private static final String BASE_URL = "http://drsmartmobile.azurewebsites.net/";
+    private static final String BASE_URL = "http://drsmart.apphb.com/api/";
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER = "Bearer";
     private static final MediaType APPLICATION_JSON = MediaType.parse("application/json");
 
     private RESTClient() {
@@ -26,9 +30,49 @@ public class RESTClient {
 
     public void loginUser(String username, String password, Callback callback) {
         String requestBody = "username=" + username + "&password=" + password + "&grant_type=password";
+
         Request request = new Request.Builder()
                 .url(BASE_URL + "token")
                 .post(RequestBody.create(APPLICATION_JSON, requestBody))
+                .build();
+
+        okHttpClient.newCall(request).enqueue(callback);
+    }
+
+    public void getMedicalHistory(Token token, Callback callback) {
+        String headerName = AUTHORIZATION;
+        String headerBody = BEARER + token.getAccessToken();
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "getHistory")
+                .header(headerName, headerBody)
+                .get()
+                .build();
+
+        okHttpClient.newCall(request).enqueue(callback);
+    }
+
+    public void getFutureVisits(Token token, Callback callback) {
+        String headerName = AUTHORIZATION;
+        String headerBody = BEARER + token.getAccessToken();
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "FutureVisits")
+                .header(headerName, headerBody)
+                .get()
+                .build();
+
+        okHttpClient.newCall(request).enqueue(callback);
+    }
+
+    public void getPastVisits(Token token, Callback callback) {
+        String headerName = AUTHORIZATION;
+        String headerBody = BEARER + token.getAccessToken();
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "PatientVisitClosed")
+                .header(headerName, headerBody)
+                .get()
                 .build();
 
         okHttpClient.newCall(request).enqueue(callback);

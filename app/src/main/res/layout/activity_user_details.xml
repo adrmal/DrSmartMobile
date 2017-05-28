@@ -1,61 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/nameImage"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_person_black_24dp"
-        android:tint="@color/colorAccent"
-        android:paddingStart="16dp"
-        android:paddingEnd="32dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp" />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:text="Adrian Małolepszy"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="@+id/nameImage"
-        app:layout_constraintBottom_toBottomOf="@id/nameImage"
-        app:layout_constraintStart_toEndOf="@id/nameImage"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingEnd="16dp" />
+        <ImageView
+            android:id="@+id/nameImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person_black_24dp"
+            android:tint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
+            android:paddingStart="16dp"
+            android:paddingEnd="32dp" />
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:text="mężczyzna"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/name"
-        app:layout_constraintStart_toEndOf="@id/nameImage"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingEnd="16dp" />
+        <TextView
+            android:id="@id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adrian Małolepszy"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/nameImage"
+            android:paddingTop="20dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="16dp" />
 
-    <TextView
-        android:id="@+id/dateOfBirth"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:text="07.11.1994 r."
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/gender"
-        app:layout_constraintStart_toEndOf="@id/nameImage"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingEnd="16dp" />
+        <TextView
+            android:id="@+id/nameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userName"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintStart_toEndOf="@id/nameImage"
+            android:paddingBottom="12dp"
+            android:paddingEnd="16dp" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mężczyzna"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/nameTitle"
+            app:layout_constraintStart_toEndOf="@id/nameImage"
+            android:paddingTop="12dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/genderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userGender"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/gender"
+            app:layout_constraintStart_toEndOf="@id/nameImage"
+            android:paddingBottom="12dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/pesel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="94010212345"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/genderTitle"
+            app:layout_constraintStart_toEndOf="@id/nameImage"
+            android:paddingTop="12dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/peselTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userPesel"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/pesel"
+            app:layout_constraintStart_toEndOf="@id/nameImage"
+            android:paddingBottom="12dp"
+            android:paddingEnd="16dp" />
+
+        <View
+            android:id="@+id/personalDataSeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"
+            app:layout_constraintStart_toStartOf="@id/peselTitle"
+            app:layout_constraintTop_toBottomOf="@id/peselTitle"
+            android:layout_marginTop="12dp" />
+
+        <ImageView
+            android:id="@+id/dateOfBirthImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_event_black_24dp"
+            android:tint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/dateOfBirth"
+            android:paddingStart="16dp"
+            android:paddingEnd="32dp" />
+
+        <TextView
+            android:id="@id/dateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="07.11.1994 r."
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/personalDataSeparator"
+            app:layout_constraintStart_toEndOf="@id/dateOfBirthImage"
+            android:paddingTop="24dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/dateOfBirthTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userDateOfBirth"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
+            app:layout_constraintStart_toEndOf="@id/dateOfBirthImage"
+            android:paddingBottom="12dp"
+            android:paddingEnd="16dp" />
+
+        <View
+            android:id="@+id/birthdaySeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"
+            app:layout_constraintStart_toStartOf="@id/dateOfBirthTitle"
+            app:layout_constraintTop_toBottomOf="@id/dateOfBirthTitle"
+            android:layout_marginTop="12dp" />
+
+        <ImageView
+            android:id="@+id/addressImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_home_black_24dp"
+            android:tint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/address"
+            android:paddingStart="16dp"
+            android:paddingEnd="32dp" />
+
+        <TextView
+            android:id="@id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ul. Wolskiego 1/3"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/birthdaySeparator"
+            app:layout_constraintStart_toEndOf="@id/addressImage"
+            android:paddingTop="24dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/addressTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userAddress"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/address"
+            app:layout_constraintStart_toEndOf="@id/addressImage"
+            android:paddingBottom="12dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="61-123 Sławno"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/addressTitle"
+            app:layout_constraintStart_toEndOf="@id/addressImage"
+            android:paddingTop="12dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/cityTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userCity"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/city"
+            app:layout_constraintStart_toEndOf="@id/addressImage"
+            android:paddingBottom="20dp"
+            android:paddingEnd="16dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
