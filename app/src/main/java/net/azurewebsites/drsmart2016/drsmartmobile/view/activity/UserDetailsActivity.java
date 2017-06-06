@@ -43,7 +43,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String json = response.body().string();
-                    patient = parseJsonToPatient(json);
+                    patient = mapJsonToPatient(json);
                     setPatientUiFields();
                 }
                 catch(JsonSyntaxException e) {
@@ -68,7 +68,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private Patient parseJsonToPatient(String json) {
+    private Patient mapJsonToPatient(String json) {
         return (Patient) JsonTool.fromJson(json, Patient.class);
     }
 

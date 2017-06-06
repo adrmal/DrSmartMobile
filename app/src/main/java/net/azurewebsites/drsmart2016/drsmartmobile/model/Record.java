@@ -1,17 +1,32 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
-public class Record {
+public class Record implements Serializable {
 
+    @SerializedName("MedicalHistoryId")
     private String id;
+    @SerializedName("PatientId")
+    private String patientId;
+    @SerializedName("DoctorId")
     private String doctorId;
-    private String date;
+    @SerializedName("Data")
+    private Date date;
+    @SerializedName("Diagnosis")
     private String diagnosis;
-    private String comment;
-    private String examination;
+    @SerializedName("Comments")
+    private String comments;
+    @SerializedName("Examinations")
+    private String examinations;
+    @SerializedName("Information")
     private String information;
-    private String recommendation;
+    @SerializedName("Recommendations")
+    private String recommendations;
 
 }

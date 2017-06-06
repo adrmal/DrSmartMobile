@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call call, Response response) throws IOException {
                             try {
                                 if(response.code() == 200) {
-                                    Token token = parseJsonToToken(response.body().string());
+                                    Token token = mapJsonToToken(response.body().string());
                                     saveAccessTokenToSharedPreferences(token);
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private Token parseJsonToToken(String json) {
+    private Token mapJsonToToken(String json) {
         return (Token) JsonTool.fromJson(json, Token.class);
     }
 

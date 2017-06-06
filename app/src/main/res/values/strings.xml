@@ -16,7 +16,7 @@
     <string name="registerVisit">Zarejestruj się na wizytę</string>
     <string name="allVisits">WSZYSTKIE</string>
     <string name="futureVisits">NADCHODZĄCE</string>
-    <string name="pastVisits">ODBYTE</string>
+    <string name="pastVisits">ZAKOŃCZONE</string>
     <string name="userName">Imię i nazwisko</string>
     <string name="userGender">Płeć</string>
     <string name="userPesel">PESEL</string>
@@ -24,4 +24,11 @@
     <string name="userAddress">Adres</string>
     <string name="userCity">Miasto</string>
     <string name="userProvince">Województwo</string>
+    <string name="recordDate">Data</string>
+    <string name="recordDiagnosis">Diagnoza</string>
+    <string name="recordExaminations">Przeprowadzone badania</string>
+    <string name="recordRecommendations">Zlecone badania</string>
+    <string name="recordInformation">Informacje od lekarza</string>
+    <string name="recordComments">Dodatkowe uwagi</string>
+    <string name="recordEmpty">brak</string>
 </resources>
