@@ -43,12 +43,12 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        initializeFields();
+        initializeUiFields();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if(isLoginEmpty() || isPasswordEmpty()) {
+                if(isLoginEmpty() || isPasswordEmpty()) {
                     setLoginErrorIfNeeded();
                     setPasswordErrorIfNeeded();
                 }
@@ -66,14 +66,14 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             try {
-                                Token token = parseJsonToToken(response.body().string());
-                                if(token.getAccessToken() == null) {
-                                    showToast(R.string.incorrectLoginOrPassword);
-                                }
-                                else {
+                                if(response.code() == 200) {
+                                    Token token = parseJsonToToken(response.body().string());
                                     saveAccessTokenToSharedPreferences(token);
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
+                                }
+                                if(response.code() == 400) {
+                                    showToast(R.string.incorrectLoginOrPassword);
                                 }
                             }
                             catch(JsonSyntaxException e) {
@@ -81,9 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                     });
-                }*/
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                }
             }
         });
     }
@@ -93,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    private void initializeFields() {
+    private void initializeUiFields() {
         editTextLogin = (EditText) findViewById(R.id.login);
         editTextPassword = (EditText) findViewById(R.id.password);
         button = (Button) findViewById(R.id.button);

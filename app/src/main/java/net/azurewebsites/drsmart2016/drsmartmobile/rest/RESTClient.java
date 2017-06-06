@@ -12,7 +12,8 @@ public class RESTClient {
 
     private static RESTClient restClient;
     private OkHttpClient okHttpClient;
-    private static final String BASE_URL = "http://drsmart.apphb.com/api/";
+    private static final String TOKEN_URL = "http://www.drsmart.pl/token";
+    private static final String BASE_URL = "http://www.drsmart.pl/api/";
     private static final String AUTHORIZATION = "Authorization";
     private static final String BEARER = "Bearer";
     private static final MediaType APPLICATION_JSON = MediaType.parse("application/json");
@@ -32,45 +33,35 @@ public class RESTClient {
         String requestBody = "username=" + username + "&password=" + password + "&grant_type=password";
 
         Request request = new Request.Builder()
-                .url(BASE_URL + "token")
+                .url(TOKEN_URL)
                 .post(RequestBody.create(APPLICATION_JSON, requestBody))
                 .build();
 
         okHttpClient.newCall(request).enqueue(callback);
     }
 
+    public void getUserDetails(Token token, Callback callback) {
+        webServiceGETMethod(token, callback, "UserInfoes");
+    }
+
     public void getMedicalHistory(Token token, Callback callback) {
-        String headerName = AUTHORIZATION;
-        String headerBody = BEARER + token.getAccessToken();
-
-        Request request = new Request.Builder()
-                .url(BASE_URL + "getHistory")
-                .header(headerName, headerBody)
-                .get()
-                .build();
-
-        okHttpClient.newCall(request).enqueue(callback);
+        webServiceGETMethod(token, callback, "getHistory");
     }
 
     public void getFutureVisits(Token token, Callback callback) {
-        String headerName = AUTHORIZATION;
-        String headerBody = BEARER + token.getAccessToken();
-
-        Request request = new Request.Builder()
-                .url(BASE_URL + "FutureVisits")
-                .header(headerName, headerBody)
-                .get()
-                .build();
-
-        okHttpClient.newCall(request).enqueue(callback);
+        webServiceGETMethod(token, callback, "FutureVisits");
     }
 
     public void getPastVisits(Token token, Callback callback) {
+        webServiceGETMethod(token, callback, "PatientVisitClosed");
+    }
+
+    private void webServiceGETMethod(Token token, Callback callback, String requestName) {
         String headerName = AUTHORIZATION;
-        String headerBody = BEARER + token.getAccessToken();
+        String headerBody = BEARER + " " + token.getAccessToken();
 
         Request request = new Request.Builder()
-                .url(BASE_URL + "PatientVisitClosed")
+                .url(BASE_URL + requestName)
                 .header(headerName, headerBody)
                 .get()
                 .build();

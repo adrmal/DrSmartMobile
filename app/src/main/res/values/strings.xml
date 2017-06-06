@@ -23,4 +23,5 @@
     <string name="userDateOfBirth">Data urodzenia</string>
     <string name="userAddress">Adres</string>
     <string name="userCity">Miasto</string>
+    <string name="userProvince">Województwo</string>
 </resources>
