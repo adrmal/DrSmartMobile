@@ -9,6 +9,7 @@
     <string name="connectionError">Błąd połączenia z Internetem.</string>
     <string name="webServiceError">System Dr Smart jest nieosiągalny. Spróbuj ponownie później.</string>
     <string name="visits">Wizyty</string>
+    <string name="visitDetails">Szczegóły wizyty</string>
     <string name="medicalHistory">Historia medyczna</string>
     <string name="recordDetails">Szczegóły choroby</string>
     <string name="userDetails">Twoje dane</string>

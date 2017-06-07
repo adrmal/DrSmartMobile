@@ -1,9 +1,7 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.view.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,14 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.JsonSyntaxException;
 
 import net.azurewebsites.drsmart2016.drsmartmobile.R;
 import net.azurewebsites.drsmart2016.drsmartmobile.model.Token;
 import net.azurewebsites.drsmart2016.drsmartmobile.rest.RESTClient;
-import net.azurewebsites.drsmart2016.drsmartmobile.util.JsonTool;
+import net.azurewebsites.drsmart2016.drsmartmobile.util.ActivityUtils;
 
 import java.io.IOException;
 
@@ -32,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLogin;
     private EditText editTextPassword;
     private Button button;
-    public static final String TOKEN_KEY = "TOKEN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +57,25 @@ public class LoginActivity extends AppCompatActivity {
                     RESTClient.getClient().loginUser(username, password, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            showToast(R.string.connectionError);
+                            ActivityUtils.with(LoginActivity.this).showToast(R.string.connectionError);
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             try {
                                 if(response.code() == 200) {
-                                    Token token = mapJsonToToken(response.body().string());
-                                    saveAccessTokenToSharedPreferences(token);
+                                    String json = response.body().string();
+                                    Token token = ActivityUtils.with(LoginActivity.this).mapJsonToObject(json, Token.class);
+                                    ActivityUtils.with(LoginActivity.this).saveTokenToSharedPreferences(token);
+
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }
                                 if(response.code() == 400) {
-                                    showToast(R.string.incorrectLoginOrPassword);
+                                    ActivityUtils.with(LoginActivity.this).showToast(R.string.incorrectLoginOrPassword);
                                 }
                             }
                             catch(JsonSyntaxException e) {
-                                showToast(R.string.webServiceError);
+                                ActivityUtils.with(LoginActivity.this).showToast(R.string.webServiceError);
                             }
                         }
                     });
@@ -125,25 +123,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(LoginActivity.this, new String[]{ Manifest.permission.INTERNET }, 0);
-    }
-
-    private void showToast(final int textResourceId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, textResourceId, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private Token mapJsonToToken(String json) {
-        return (Token) JsonTool.fromJson(json, Token.class);
-    }
-
-    private void saveAccessTokenToSharedPreferences(Token token) {
-        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit();
-        editor.putString(TOKEN_KEY, token.getAccessToken());
-        editor.apply();
     }
 
 }

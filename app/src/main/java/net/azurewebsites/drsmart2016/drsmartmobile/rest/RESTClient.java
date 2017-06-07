@@ -48,6 +48,10 @@ public class RESTClient {
         webServiceGETMethod(token, callback, "getHistory");
     }
 
+    public void getAllVisits(Token token, Callback callback) {
+        webServiceGETMethod(token, callback, "PatientVisit");
+    }
+
     public void getFutureVisits(Token token, Callback callback) {
         webServiceGETMethod(token, callback, "FutureVisits");
     }

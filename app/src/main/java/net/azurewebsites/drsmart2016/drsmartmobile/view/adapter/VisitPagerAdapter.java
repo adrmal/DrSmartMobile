@@ -10,11 +10,11 @@ import net.azurewebsites.drsmart2016.drsmartmobile.view.fragment.AllVisitsFragme
 import net.azurewebsites.drsmart2016.drsmartmobile.view.fragment.FutureVisitsFragment;
 import net.azurewebsites.drsmart2016.drsmartmobile.view.fragment.PastVisitsFragment;
 
-public class VisitsPagerAdapter extends FragmentPagerAdapter {
+public class VisitPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
 
-    public VisitsPagerAdapter(Context context, FragmentManager fm) {
+    public VisitPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
     }

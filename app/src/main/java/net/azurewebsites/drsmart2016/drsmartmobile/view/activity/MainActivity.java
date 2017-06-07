@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch(item.getItemId()) {
             case R.id.drawerVisits:
-                intent = new Intent(this, VisitsActivity.class);
+                intent = new Intent(this, VisitActivity.class);
                 startActivity(intent);
                 break;
             case R.id.drawerMedicalHistory:

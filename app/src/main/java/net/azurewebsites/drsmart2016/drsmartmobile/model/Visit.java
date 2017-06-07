@@ -2,12 +2,13 @@ package net.azurewebsites.drsmart2016.drsmartmobile.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class Visit {
+public class Visit implements Serializable {
 
     @SerializedName("VisitId")
     private String id;

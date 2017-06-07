@@ -6,9 +6,7 @@ import android.widget.TextView;
 
 import net.azurewebsites.drsmart2016.drsmartmobile.R;
 import net.azurewebsites.drsmart2016.drsmartmobile.model.Record;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import net.azurewebsites.drsmart2016.drsmartmobile.util.ActivityUtils;
 
 public class RecordDetailsActivity extends AppCompatActivity {
 
@@ -29,7 +27,7 @@ public class RecordDetailsActivity extends AppCompatActivity {
 
     private void setRecordUiFields() {
         TextView date = (TextView) findViewById(R.id.date);
-        date.setText(getDateText());
+        date.setText(ActivityUtils.with().getDateText(record.getDate()));
         TextView diagnosis = (TextView) findViewById(R.id.diagnosis);
         diagnosis.setText(getTextValue(record.getDiagnosis()));
         TextView examinations = (TextView) findViewById(R.id.examinations);
@@ -47,32 +45,6 @@ public class RecordDetailsActivity extends AppCompatActivity {
             return getString(R.string.recordEmpty);
         }
         return value;
-    }
-
-    private String getDateText() {
-        if(record.getDate() == null) {
-            return getString(R.string.recordEmpty);
-        }
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(record.getDate());
-
-        String text;
-        if(calendar.get(Calendar.DAY_OF_MONTH) < 10) {
-            text = "0" + calendar.get(Calendar.DAY_OF_MONTH) + ".";
-        }
-        else {
-            text = calendar.get(Calendar.DAY_OF_MONTH) + ".";
-        }
-        if(calendar.get(Calendar.MONTH)  < 10) {
-            text = text + "0" + (calendar.get(Calendar.MONTH) + 1) + ".";
-        }
-        else {
-            text = text + (calendar.get(Calendar.MONTH) + 1) + ".";
-        }
-        text = text + calendar.get(Calendar.YEAR) + " r.";
-
-        return text;
     }
 
 }
