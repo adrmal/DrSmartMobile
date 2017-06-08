@@ -22,7 +22,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:text="@string/date" />
+            android:text="@string/date1" />
 
         <TextView
             android:id="@+id/date"

@@ -29,11 +29,13 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLogin;
     private EditText editTextPassword;
     private Button button;
+    private ActivityUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        utils = new ActivityUtils(this);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -57,25 +59,25 @@ public class LoginActivity extends AppCompatActivity {
                     RESTClient.getClient().loginUser(username, password, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            ActivityUtils.with(LoginActivity.this).showToast(R.string.connectionError);
+                            utils.showToast(R.string.connectionError);
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             try {
                                 if(response.code() == 200) {
                                     String json = response.body().string();
-                                    Token token = ActivityUtils.with(LoginActivity.this).mapJsonToObject(json, Token.class);
-                                    ActivityUtils.with(LoginActivity.this).saveTokenToSharedPreferences(token);
+                                    Token token = utils.mapJsonToObject(json, Token.class);
+                                    utils.saveTokenToSharedPreferences(token);
 
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }
                                 if(response.code() == 400) {
-                                    ActivityUtils.with(LoginActivity.this).showToast(R.string.incorrectLoginOrPassword);
+                                    utils.showToast(R.string.incorrectLoginOrPassword);
                                 }
                             }
                             catch(JsonSyntaxException e) {
-                                ActivityUtils.with(LoginActivity.this).showToast(R.string.webServiceError);
+                                utils.showToast(R.string.webServiceError);
                             }
                         }
                     });

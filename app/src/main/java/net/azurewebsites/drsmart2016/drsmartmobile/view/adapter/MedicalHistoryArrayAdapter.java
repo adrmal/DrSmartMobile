@@ -15,8 +15,12 @@ import java.util.List;
 
 public class MedicalHistoryArrayAdapter extends ArrayAdapter<Record> {
 
+    private ActivityUtils utils;
+
     public MedicalHistoryArrayAdapter(Context context, int resource, List<Record> objects) {
         super(context, resource, objects);
+
+        utils = new ActivityUtils();
     }
 
     @Override
@@ -35,7 +39,7 @@ public class MedicalHistoryArrayAdapter extends ArrayAdapter<Record> {
         TextView diagnosis = (TextView) recordView.findViewById(R.id.diagnosis);
         diagnosis.setText(record.getDiagnosis());
         TextView date = (TextView) recordView.findViewById(R.id.date);
-        date.setText(ActivityUtils.with().getDateText(record.getDate()));
+        date.setText(utils.getDateText(record.getDate()));
     }
 
 }

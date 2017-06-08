@@ -11,12 +11,14 @@ import net.azurewebsites.drsmart2016.drsmartmobile.util.ActivityUtils;
 public class RecordDetailsActivity extends AppCompatActivity {
 
     private Record record;
+    private ActivityUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_details);
         setTitle(R.string.recordDetails);
+        utils = new ActivityUtils(this);
 
         if(getIntent() != null) {
             record = (Record) getIntent().getSerializableExtra(MedicalHistoryActivity.RECORD_KEY);
@@ -27,7 +29,7 @@ public class RecordDetailsActivity extends AppCompatActivity {
 
     private void setRecordUiFields() {
         TextView date = (TextView) findViewById(R.id.date);
-        date.setText(ActivityUtils.with().getDateText(record.getDate()));
+        date.setText(utils.getDateText(record.getDate()));
         TextView doctor = (TextView) findViewById(R.id.doctor);
         doctor.setText(getTextValue(record.getDoctorFullName()));
         TextView doctorSpecialty = (TextView) findViewById(R.id.doctorSpecialty);

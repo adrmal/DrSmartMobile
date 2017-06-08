@@ -33,7 +33,8 @@
     <string name="recordEmpty">brak</string>
     <string name="visitStatus">Status</string>
     <string name="visitType">Typ</string>
-    <string name="date">Data</string>
+    <string name="date1">Data</string>
+    <string name="date2">Termin</string>
     <string name="doctor">Lekarz</string>
     <string name="doctorSpecialty">Specjalizacja lekarza</string>
 </resources>

@@ -15,8 +15,12 @@ import java.util.List;
 
 public class VisitArrayAdapter extends ArrayAdapter<Visit> {
 
+    private ActivityUtils utils;
+
     public VisitArrayAdapter(Context context, int resource, List<Visit> objects) {
         super(context, resource, objects);
+
+        utils = new ActivityUtils();
     }
 
     @Override
@@ -35,7 +39,7 @@ public class VisitArrayAdapter extends ArrayAdapter<Visit> {
         TextView doctor = (TextView) recordView.findViewById(R.id.doctor);
         doctor.setText(visit.getDoctorFullName());
         TextView date = (TextView) recordView.findViewById(R.id.date);
-        date.setText(ActivityUtils.with().getDateText(visit.getDate()));
+        date.setText(utils.getDateTimeText(visit.getDate()));
     }
 
 }

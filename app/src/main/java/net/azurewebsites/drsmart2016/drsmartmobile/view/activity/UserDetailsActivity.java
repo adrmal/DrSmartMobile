@@ -21,29 +21,31 @@ import okhttp3.Response;
 public class UserDetailsActivity extends AppCompatActivity {
 
     private Patient patient;
+    private ActivityUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
         setTitle(R.string.userDetails);
+        utils = new ActivityUtils(this);
 
-        Token token = ActivityUtils.with(this).getTokenFromSharedPreferences();
+        Token token = utils.getTokenFromSharedPreferences();
         RESTClient.getClient().getUserDetails(token, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                ActivityUtils.with(UserDetailsActivity.this).showToast(R.string.connectionError);
+                utils.showToast(R.string.connectionError);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String json = response.body().string();
-                    patient = ActivityUtils.with(UserDetailsActivity.this).mapJsonToObject(json, Patient.class);
+                    patient = utils.mapJsonToObject(json, Patient.class);
                     setPatientUiFields();
                 }
                 catch(JsonSyntaxException e) {
-                    ActivityUtils.with(UserDetailsActivity.this).showToast(R.string.webServiceError);
+                    utils.showToast(R.string.webServiceError);
                 }
             }
         });
@@ -60,7 +62,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 TextView pesel = (TextView) findViewById(R.id.pesel);
                 pesel.setText(patient.getPesel());
                 TextView dateOfBirth = (TextView) findViewById(R.id.dateOfBirth);
-                dateOfBirth.setText(ActivityUtils.with().getDateText(patient.getDateOfBirth()));
+                dateOfBirth.setText(utils.getDateText(patient.getDateOfBirth()));
                 TextView address = (TextView) findViewById(R.id.address);
                 address.setText(patient.getAddress());
                 TextView city = (TextView) findViewById(R.id.city);

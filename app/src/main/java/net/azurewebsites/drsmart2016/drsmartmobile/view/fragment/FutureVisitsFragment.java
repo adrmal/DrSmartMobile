@@ -32,28 +32,30 @@ import okhttp3.Response;
 public class FutureVisitsFragment extends Fragment {
 
     private List<Visit> visits;
+    private ActivityUtils utils;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_future_visits, container, false);
+        utils = new ActivityUtils(getActivity());
 
-        Token token = ActivityUtils.with(getActivity()).getTokenFromSharedPreferences();
+        Token token = utils.getTokenFromSharedPreferences();
         RESTClient.getClient().getFutureVisits(token, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                ActivityUtils.with(getActivity()).showToast(R.string.connectionError);
+                utils.showToast(R.string.connectionError);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String json = response.body().string();
-                    Visit[] visitsArray = ActivityUtils.with(getActivity()).mapJsonToObject(json, Visit[].class);
+                    Visit[] visitsArray = utils.mapJsonToObject(json, Visit[].class);
                     visits = new ArrayList<>(Arrays.asList(visitsArray));
                     initializeListViewAndAdapter(view);
                 }
                 catch(JsonSyntaxException e) {
-                    ActivityUtils.with(getActivity()).showToast(R.string.webServiceError);
+                    utils.showToast(R.string.webServiceError);
                 }
             }
         });

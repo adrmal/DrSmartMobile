@@ -17,20 +17,12 @@ public class ActivityUtils {
     private FragmentActivity activity;
     private static final String TOKEN_KEY = "TOKEN_KEY";
 
-    private ActivityUtils() {
+    public ActivityUtils() {
         // nop
     }
 
-    private ActivityUtils(FragmentActivity activity) {
+    public ActivityUtils(FragmentActivity activity) {
         this.activity = activity;
-    }
-
-    public static ActivityUtils with(FragmentActivity activity) {
-        return new ActivityUtils(activity);
-    }
-
-    public static ActivityUtils with() {
-        return new ActivityUtils();
     }
 
     public void showToast(final int textResourceId) {
@@ -76,6 +68,21 @@ public class ActivityUtils {
             text = text + (calendar.get(Calendar.MONTH) + 1) + ".";
         }
         text = text + calendar.get(Calendar.YEAR) + " r.";
+
+        return text;
+    }
+
+    public String getDateTimeText(Date date) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+
+        String text = getDateText(date) + "  " + calendar.get(Calendar.HOUR_OF_DAY) + ":";
+        if(calendar.get(Calendar.MINUTE) < 10) {
+            text = text + "0" + calendar.get(Calendar.MINUTE);
+        }
+        else {
+            text = text + calendar.get(Calendar.MINUTE);
+        }
 
         return text;
     }

@@ -27,30 +27,32 @@ public class MedicalHistoryActivity extends AppCompatActivity {
 
     private MedicalHistory medicalHistory;
     public static final String RECORD_KEY = "RECORD_KEY";
+    private ActivityUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_history);
         setTitle(R.string.medicalHistory);
+        utils = new ActivityUtils(this);
 
-        Token token = ActivityUtils.with(this).getTokenFromSharedPreferences();
+        Token token = utils.getTokenFromSharedPreferences();
         RESTClient.getClient().getMedicalHistory(token, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                ActivityUtils.with(MedicalHistoryActivity.this).showToast(R.string.connectionError);
+                utils.showToast(R.string.connectionError);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String json = response.body().string();
-                    Record[] records = ActivityUtils.with(MedicalHistoryActivity.this).mapJsonToObject(json, Record[].class);
+                    Record[] records = utils.mapJsonToObject(json, Record[].class);
                     medicalHistory = new MedicalHistory(records);
                     initializeListViewAndAdapter();
                 }
                 catch(JsonSyntaxException e) {
-                    ActivityUtils.with(MedicalHistoryActivity.this).showToast(R.string.webServiceError);
+                    utils.showToast(R.string.webServiceError);
                 }
             }
         });

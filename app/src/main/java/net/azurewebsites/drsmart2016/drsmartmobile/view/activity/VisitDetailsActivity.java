@@ -11,12 +11,14 @@ import net.azurewebsites.drsmart2016.drsmartmobile.util.ActivityUtils;
 public class VisitDetailsActivity extends AppCompatActivity {
 
     private Visit visit;
+    private ActivityUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visit_details);
         setTitle(R.string.visitDetails);
+        utils = new ActivityUtils(this);
 
         if(getIntent() != null) {
             visit = (Visit) getIntent().getSerializableExtra(VisitActivity.VISIT_KEY);
@@ -27,7 +29,7 @@ public class VisitDetailsActivity extends AppCompatActivity {
 
     private void setVisitUiFields() {
         TextView date = (TextView) findViewById(R.id.date);
-        date.setText(ActivityUtils.with().getDateText(visit.getDate()));
+        date.setText(utils.getDateTimeText(visit.getDate()));
         TextView doctor = (TextView) findViewById(R.id.doctor);
         doctor.setText(getTextValue(visit.getDoctorFullName()));
         TextView doctorSpecialty = (TextView) findViewById(R.id.doctorSpecialty);
