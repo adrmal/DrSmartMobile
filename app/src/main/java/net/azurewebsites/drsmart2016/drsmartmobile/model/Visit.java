@@ -16,8 +16,12 @@ public class Visit implements Serializable {
     private String patientId;
     @SerializedName("DoctorId")
     private String doctorId;
-    @SerializedName("SpecialtyId")
+    @SerializedName("DoctorName")
+    private String doctorFullName;
+    @SerializedName("SpecialityId")
     private String doctorSpecialtyId;
+    @SerializedName("SpecialityName")
+    private String doctorSpecialtyName;
     @SerializedName("Data")
     private Date date;
     @SerializedName("Status")

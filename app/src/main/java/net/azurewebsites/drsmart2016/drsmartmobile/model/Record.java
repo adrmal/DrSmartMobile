@@ -16,6 +16,10 @@ public class Record implements Serializable {
     private String patientId;
     @SerializedName("DoctorId")
     private String doctorId;
+    @SerializedName("DoctorName")
+    private String doctorFullName;
+    @SerializedName("Speciality")
+    private String doctorSpecialtyName;
     @SerializedName("Data")
     private Date date;
     @SerializedName("Diagnosis")

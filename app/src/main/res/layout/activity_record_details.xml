@@ -22,10 +22,46 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:text="@string/recordDate" />
+            android:text="@string/date" />
 
         <TextView
             android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/doctorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/doctor" />
+
+        <TextView
+            android:id="@+id/doctor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/doctorSpecialtyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/doctorSpecialty" />
+
+        <TextView
+            android:id="@+id/doctorSpecialty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="24dp"

@@ -25,11 +25,15 @@
     <string name="userAddress">Adres</string>
     <string name="userCity">Miasto</string>
     <string name="userProvince">Województwo</string>
-    <string name="recordDate">Data</string>
     <string name="recordDiagnosis">Diagnoza</string>
     <string name="recordExaminations">Przeprowadzone badania</string>
     <string name="recordRecommendations">Zlecone badania</string>
     <string name="recordInformation">Informacje od lekarza</string>
     <string name="recordComments">Dodatkowe uwagi</string>
     <string name="recordEmpty">brak</string>
+    <string name="visitStatus">Status</string>
+    <string name="visitType">Typ</string>
+    <string name="date">Data</string>
+    <string name="doctor">Lekarz</string>
+    <string name="doctorSpecialty">Specjalizacja lekarza</string>
 </resources>

@@ -45,19 +45,19 @@ public class RESTClient {
     }
 
     public void getMedicalHistory(Token token, Callback callback) {
-        webServiceGETMethod(token, callback, "getHistory");
+        webServiceGETMethod(token, callback, "getHistoryDetails");
     }
 
     public void getAllVisits(Token token, Callback callback) {
-        webServiceGETMethod(token, callback, "PatientVisit");
+        webServiceGETMethod(token, callback, "PatientVisitDetails");
     }
 
     public void getFutureVisits(Token token, Callback callback) {
-        webServiceGETMethod(token, callback, "FutureVisits");
+        webServiceGETMethod(token, callback, "FutureVisitsDetails");
     }
 
     public void getPastVisits(Token token, Callback callback) {
-        webServiceGETMethod(token, callback, "PatientVisitClosed");
+        webServiceGETMethod(token, callback, "PatientVisitClosedDetails");
     }
 
     private void webServiceGETMethod(Token token, Callback callback, String requestName) {

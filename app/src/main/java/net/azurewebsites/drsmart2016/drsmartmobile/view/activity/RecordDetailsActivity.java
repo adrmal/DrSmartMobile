@@ -28,6 +28,10 @@ public class RecordDetailsActivity extends AppCompatActivity {
     private void setRecordUiFields() {
         TextView date = (TextView) findViewById(R.id.date);
         date.setText(ActivityUtils.with().getDateText(record.getDate()));
+        TextView doctor = (TextView) findViewById(R.id.doctor);
+        doctor.setText(getTextValue(record.getDoctorFullName()));
+        TextView doctorSpecialty = (TextView) findViewById(R.id.doctorSpecialty);
+        doctorSpecialty.setText(getTextValue(record.getDoctorSpecialtyName()));
         TextView diagnosis = (TextView) findViewById(R.id.diagnosis);
         diagnosis.setText(getTextValue(record.getDiagnosis()));
         TextView examinations = (TextView) findViewById(R.id.examinations);

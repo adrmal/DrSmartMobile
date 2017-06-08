@@ -33,7 +33,7 @@ public class VisitArrayAdapter extends ArrayAdapter<Visit> {
 
     private void setVisitUiFields(Visit visit, View recordView) {
         TextView doctor = (TextView) recordView.findViewById(R.id.doctor);
-        doctor.setText(visit.getDoctorId());
+        doctor.setText(visit.getDoctorFullName());
         TextView date = (TextView) recordView.findViewById(R.id.date);
         date.setText(ActivityUtils.with().getDateText(visit.getDate()));
     }

@@ -15,9 +15,94 @@
         android:paddingBottom="24dp">
 
         <TextView
+            android:id="@+id/dateTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/visitDetails" />
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/date" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/doctorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/doctor" />
+
+        <TextView
+            android:id="@+id/doctor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/doctorSpecialtyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/doctorSpecialty" />
+
+        <TextView
+            android:id="@+id/doctorSpecialty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/typeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/visitType" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/statusTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="@string/visitStatus" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack" />
 
     </LinearLayout>
 
