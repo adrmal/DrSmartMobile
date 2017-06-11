@@ -76,12 +76,36 @@ public class ActivityUtils {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
-        String text = getDateText(date) + "  " + calendar.get(Calendar.HOUR_OF_DAY) + ":";
+        String text = getDateText(date) + "  ";
+        if(calendar.get(Calendar.HOUR_OF_DAY) < 10) {
+            text = text + "0" + calendar.get(Calendar.HOUR_OF_DAY) + ":";
+        }
+        else {
+            text = text + calendar.get(Calendar.HOUR_OF_DAY) + ":";
+        }
         if(calendar.get(Calendar.MINUTE) < 10) {
             text = text + "0" + calendar.get(Calendar.MINUTE);
         }
         else {
             text = text + calendar.get(Calendar.MINUTE);
+        }
+
+        return text;
+    }
+
+    public String getTimeText(int hour, int minute) {
+        String text;
+        if(hour < 10) {
+            text = "0" + hour + ":";
+        }
+        else {
+            text = hour + ":";
+        }
+        if(minute < 10) {
+            text = text + "0" + minute;
+        }
+        else {
+            text = text + minute;
         }
 
         return text;
