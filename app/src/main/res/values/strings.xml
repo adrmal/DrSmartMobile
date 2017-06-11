@@ -14,7 +14,14 @@
     <string name="recordDetails">Szczegóły choroby</string>
     <string name="userDetails">Twoje dane</string>
     <string name="logOut">Wyloguj</string>
-    <string name="registerVisit">Zarejestruj się na wizytę</string>
+    <string name="registerVisit">Rejestracja wizyty</string>
+    <string name="registerVisitAction">Zarejestruj wizytę</string>
+    <string name="registerVisitDone">Wizyta została zarejestrowana</string>
+    <string name="registerVisitDoctor">Lekarz</string>
+    <string name="registerVisitSpecialty">Specjalizacja lekarza</string>
+    <string name="registerVisitDate">Dzień</string>
+    <string name="registerVisitTime">Godzina</string>
+    <string name="registerVisitVisitType">Typ wizyty</string>
     <string name="allVisits">WSZYSTKIE</string>
     <string name="futureVisits">NADCHODZĄCE</string>
     <string name="pastVisits">ZAKOŃCZONE</string>
