@@ -38,6 +38,10 @@ public class ActivityUtils {
         return (T) JsonTool.fromJson(json, clazz);
     }
 
+    public String mapObjectToJson(Object object) {
+        return JsonTool.toJson(object);
+    }
+
     public Token getTokenFromSharedPreferences() {
         SharedPreferences preferences = activity.getSharedPreferences(activity.getString(R.string.app_name), Context.MODE_PRIVATE);
         String accessToken = preferences.getString(TOKEN_KEY, null);

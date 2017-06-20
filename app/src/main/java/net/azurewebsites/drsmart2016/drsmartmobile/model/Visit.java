@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import lombok.Data;
 
@@ -28,5 +29,9 @@ public class Visit implements Serializable {
     private String status;
     @SerializedName("Type")
     private String type;
+
+    public Visit() {
+        this.id = UUID.randomUUID().toString();
+    }
 
 }

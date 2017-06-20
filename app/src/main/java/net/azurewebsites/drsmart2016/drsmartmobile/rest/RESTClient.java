@@ -60,14 +60,39 @@ public class RESTClient {
         webServiceGETMethod(token, callback, "PatientVisitClosedDetails");
     }
 
-    private void webServiceGETMethod(Token token, Callback callback, String requestName) {
+    public void getAllSpecialties(Token token, Callback callback) {
+        webServiceGETMethod(token, callback, "specialitiesList");
+    }
+
+    public void getDoctorsBySpecialtyId(String specialtyId, Token token, Callback callback) {
+        webServiceGETMethod(token, callback, "specialityUsers?specialityId=" + specialtyId);
+    }
+
+    public void registerVisit(String visitAsJson, Token token, Callback callback) {
+        webServicePOSTMethod(token, callback, "addVisit", visitAsJson);
+    }
+
+    private void webServiceGETMethod(Token token, Callback callback, String requestUrl) {
         String headerName = AUTHORIZATION;
         String headerBody = BEARER + " " + token.getAccessToken();
 
         Request request = new Request.Builder()
-                .url(BASE_URL + requestName)
+                .url(BASE_URL + requestUrl)
                 .header(headerName, headerBody)
                 .get()
+                .build();
+
+        okHttpClient.newCall(request).enqueue(callback);
+    }
+
+    private void webServicePOSTMethod(Token token, Callback callback, String requestUrl, String requestBody) {
+        String headerName = AUTHORIZATION;
+        String headerBody = BEARER + " " + token.getAccessToken();
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + requestUrl)
+                .header(headerName, headerBody)
+                .post(RequestBody.create(APPLICATION_JSON, requestBody))
                 .build();
 
         okHttpClient.newCall(request).enqueue(callback);

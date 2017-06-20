@@ -1,7 +1,5 @@
 package net.azurewebsites.drsmart2016.drsmartmobile.model;
 
-import net.azurewebsites.drsmart2016.drsmartmobile.util.Specialty;
-
 import java.util.List;
 
 import lombok.Data;

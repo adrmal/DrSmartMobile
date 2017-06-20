@@ -19,13 +19,27 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import net.azurewebsites.drsmart2016.drsmartmobile.R;
-import net.azurewebsites.drsmart2016.drsmartmobile.util.ActivityUtils;
+import com.google.gson.JsonSyntaxException;
 
+import net.azurewebsites.drsmart2016.drsmartmobile.R;
+import net.azurewebsites.drsmart2016.drsmartmobile.model.Visit;
+import net.azurewebsites.drsmart2016.drsmartmobile.model.VisitStatus;
+import net.azurewebsites.drsmart2016.drsmartmobile.model.VisitType;
+import net.azurewebsites.drsmart2016.drsmartmobile.rest.RESTClient;
+import net.azurewebsites.drsmart2016.drsmartmobile.util.ActivityUtils;
+import net.azurewebsites.drsmart2016.drsmartmobile.model.Specialty;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class RegisterVisitActivity extends AppCompatActivity {
 
@@ -34,7 +48,13 @@ public class RegisterVisitActivity extends AppCompatActivity {
     private TextView textViewDate;
     private TextView textViewTime;
     private Spinner spinnerVisitType;
+    private List<Specialty> specialties;
+    private List<HashMap> doctors;
+    private List<VisitType> visitTypes;
     private ActivityUtils utils;
+    private int specialtyCounter;
+    private int doctorCounter;
+    private Visit visit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +63,12 @@ public class RegisterVisitActivity extends AppCompatActivity {
         setTitle(R.string.registerVisit);
         utils = new ActivityUtils(this);
 
+        visit = new Visit();
+
         initializeUiFields();
         disableUiFields();
 
         setSpinnerSpecialtyActions();
-        setSpinnerDoctorActions();
-        setTextViewDateActions();
-        setTextViewTimeActions();
         setSpinnerVisitTypeActions();
     }
 
@@ -69,18 +88,40 @@ public class RegisterVisitActivity extends AppCompatActivity {
     }
 
     private void setSpinnerSpecialtyActions() {
-        List<String> specialties = new ArrayList<>();
-        specialties.add("Chirurg");
-        specialties.add("Ortopeda");
-        specialties.add("Laryngolog");
+        RESTClient.getClient().getAllSpecialties(utils.getTokenFromSharedPreferences(), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                utils.showToast(R.string.connectionError);
+            }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_main_item, specialties);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String json = response.body().string();
+                    Specialty[] specialtiesArray = utils.mapJsonToObject(json, Specialty[].class);
+                    specialties = new ArrayList<>(Arrays.asList(specialtiesArray));
+                    setSpinnerSpecialtyValues();
+                }
+                catch(JsonSyntaxException e) {
+                    utils.showToast(R.string.webServiceError);
+                }
+            }
+        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_main_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        specialtyCounter = 0;
         spinnerSpecialty.setAdapter(adapter);
         spinnerSpecialty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerDoctor.setEnabled(true);
+                if(specialtyCounter > 0) {
+                    spinnerDoctor.setEnabled(true);
+                    visit.setDoctorSpecialtyId(specialties.get(position).getId());
+                    setSpinnerDoctorActions();
+                }
+                else {
+                    specialtyCounter++;
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -89,18 +130,42 @@ public class RegisterVisitActivity extends AppCompatActivity {
     }
 
     private void setSpinnerDoctorActions() {
-        List<String> doctors = new ArrayList<>();
-        doctors.add("Jan Pelikan");
-        doctors.add("Jan Kowalski");
-        doctors.add("Kamil Legierski");
+        RESTClient.getClient().getDoctorsBySpecialtyId(visit.getDoctorSpecialtyId(), utils.getTokenFromSharedPreferences(), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                utils.showToast(R.string.connectionError);
+            }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_main_item, doctors);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String json = response.body().string();
+                    HashMap[] doctorsArray = utils.mapJsonToObject(json, HashMap[].class);
+                    doctors = new ArrayList<>(Arrays.asList(doctorsArray));
+                    setSpinnerDoctorValues();
+                }
+                catch(JsonSyntaxException e) {
+                    utils.showToast(R.string.webServiceError);
+                }
+            }
+        });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_main_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        doctorCounter = 0;
         spinnerDoctor.setAdapter(adapter);
         spinnerDoctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                textViewDate.setEnabled(true);
+                if(doctorCounter > 0) {
+                    textViewDate.setEnabled(true);
+                    visit.setDoctorId(doctors.get(position).get("Id").toString());
+                    visit.setDoctorFullName(doctors.get(position).get("FullName").toString());
+                    setTextViewDateActions();
+                }
+                else {
+                    doctorCounter++;
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -129,23 +194,56 @@ public class RegisterVisitActivity extends AppCompatActivity {
     }
 
     private void setSpinnerVisitTypeActions() {
-        List<String> visitTypes = new ArrayList<>();
-        visitTypes.add("Konsultacja");
-        visitTypes.add("Badanie");
-        visitTypes.add("Zabieg");
+        VisitType[] visitTypesArray = VisitType.values();
+        visitTypes = new ArrayList<>(Arrays.asList(visitTypesArray));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_main_item, visitTypes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_main_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerVisitType.setAdapter(adapter);
         spinnerVisitType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                visit.setType(visitTypes.get(position).getTextValue());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        setSpinnerVisitTypeValues();
+    }
+
+    private void setSpinnerSpecialtyValues() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                List<String> specialtiesNames = new ArrayList<>();
+                for(Specialty specialty : specialties) {
+                    specialtiesNames.add(specialty.getName());
+                }
+                ((ArrayAdapter) spinnerSpecialty.getAdapter()).addAll(specialtiesNames);
+            }
+        });
+    }
+
+    private void setSpinnerDoctorValues() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                List<String> doctorsNames = new ArrayList<>();
+                for(HashMap doctor : doctors) {
+                    doctorsNames.add(doctor.get("FullName").toString());
+                }
+                ((ArrayAdapter) spinnerDoctor.getAdapter()).addAll(doctorsNames);
+            }
+        });
+    }
+
+    private void setSpinnerVisitTypeValues() {
+        List<String> visitTypesNames = new ArrayList<>();
+        for(VisitType visitType : visitTypes) {
+            visitTypesNames.add(visitType.getTextValue());
+        }
+        ((ArrayAdapter) spinnerVisitType.getAdapter()).addAll(visitTypesNames);
     }
 
     @Override
@@ -159,9 +257,25 @@ public class RegisterVisitActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_register:
-                utils.showToast(R.string.registerVisitDone);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                visit.setStatus(VisitStatus.ACTIVE.getTextValue());
+                RESTClient.getClient().registerVisit(utils.mapObjectToJson(visit), utils.getTokenFromSharedPreferences(), new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        utils.showToast(R.string.connectionError);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        utils.showToast(R.string.registerVisitDone);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(RegisterVisitActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -179,6 +293,8 @@ public class RegisterVisitActivity extends AppCompatActivity {
                     String dateText = activity.utils.getDateText(calendar.getTime());
                     activity.textViewDate.setText(dateText);
                     activity.textViewTime.setEnabled(true);
+                    activity.setTextViewTimeActions();
+                    activity.visit.setDate(calendar.getTime());
                 }
             };
             return new DatePickerDialog(
@@ -201,6 +317,8 @@ public class RegisterVisitActivity extends AppCompatActivity {
                     String timeText = activity.utils.getTimeText(hourOfDay, minute);
                     activity.textViewTime.setText(timeText);
                     activity.spinnerVisitType.setEnabled(true);
+                    activity.visit.getDate().setHours(hourOfDay);
+                    activity.visit.getDate().setMinutes(minute);
                 }
             };
             return new TimePickerDialog(
