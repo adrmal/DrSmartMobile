@@ -36,4 +36,10 @@ public class User {
     @SerializedName("Locked")
     protected boolean isLocked;
 
+    public String getFullNameText() {
+        return getFirstName() + " "
+                + (getSecondName() == null ? "" : getSecondName() + " ")
+                + getLastName();
+    }
+
 }

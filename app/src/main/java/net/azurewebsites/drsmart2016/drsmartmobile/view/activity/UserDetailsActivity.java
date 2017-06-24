@@ -56,7 +56,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 TextView name = (TextView) findViewById(R.id.name);
-                name.setText(getFullNameText());
+                name.setText(patient.getFullNameText());
                 TextView gender = (TextView) findViewById(R.id.gender);
                 gender.setText(patient.getGender().toString());
                 TextView pesel = (TextView) findViewById(R.id.pesel);
@@ -71,12 +71,6 @@ public class UserDetailsActivity extends AppCompatActivity {
                 province.setText(patient.getProvince().toLowerCase());
             }
         });
-    }
-
-    private String getFullNameText() {
-        return patient.getFirstName() + " "
-                + (patient.getSecondName() == null ? "" : patient.getSecondName() + " ")
-                + patient.getLastName();
     }
 
 }
