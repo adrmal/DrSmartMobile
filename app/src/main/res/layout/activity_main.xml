@@ -1,162 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorWhite">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+        <android.support.v7.widget.CardView
+            android:id="@+id/visits"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            card_view:cardCornerRadius="4dp"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center">
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/cardPersonalData"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_event_black_24dp"
+                    android:layout_marginBottom="8dp"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="4dp"
-                    card_view:cardBackgroundColor="@color/colorAccent"
-                    android:layout_marginBottom="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingTop="24dp"
-                        android:paddingBottom="24dp"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="24sp"
-                            android:text="Twój profil"
-                            android:layout_marginBottom="16dp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"
-                            android:textSize="14sp"
-                            android:text="Jan Pelikan" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="14sp"
-                            android:text="38 lat" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="14sp"
-                            android:text="zarejestrowany 28.02.2016 r." />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="14sp"
-                            android:text="17 wizyt" />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/cardFutureVisits"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="4dp"
-                    card_view:cardBackgroundColor="@color/colorPrimary"
-                    android:layout_marginBottom="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingTop="24dp"
-                        android:paddingBottom="24dp"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="24sp"
-                            android:text="Najbliższa wizyta"
-                            android:layout_marginBottom="16dp"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="3.06.2017" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="14sp"
-                            android:text="czwartek 14:30" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="14sp"
-                            android:text="Paweł Dzięcioł" />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@string/visits" />
 
             </LinearLayout>
 
-        </ScrollView>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/medicalHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_history_black_24dp"
+                    android:layout_marginBottom="8dp"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@string/medicalHistory" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/colorWhite"
-        app:headerLayout="@layout/navigation_drawer_header"
-        app:menu="@menu/menu_navigation_drawer" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</android.support.v4.widget.DrawerLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/userDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:layout_marginBottom="8dp"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@string/userDetails" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/logOut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardBackgroundColor="@color/colorPrimary"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_exit_to_app_black_24dp"
+                    android:layout_marginBottom="8dp"
+                    android:tint="@color/colorWhite" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:text="@string/logOut" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>
